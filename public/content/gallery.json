@@ -1,0 +1,16 @@
+{
+  "sectionLabel": "Фотогалерея",
+  "title": "Ощутите атмосферу",
+  "highlight": "Абхазии",
+  "description": "Красота Черноморского побережья, уютные комнаты и радостные моменты",
+  "images": [
+    { "src": "/gallery1.jpg", "alt": "Пляж Цандрипш" },
+    { "src": "/gallery2.jpg", "alt": "Озеро Рица" },
+    { "src": "/gallery3.jpg", "alt": "Вечер у костра" },
+    { "src": "/room.jpg", "alt": "Комнаты лагеря" },
+    { "src": "/food.jpg", "alt": "Питание" },
+    { "src": "/activities.jpg", "alt": "Активности" },
+    { "src": "/sports.jpg", "alt": "Спортивный зал" },
+    { "src": "/hero-bg.jpg", "alt": "Вид на море" }
+  ]
+}

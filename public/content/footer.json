@@ -1,0 +1,32 @@
+{
+  "brand": {
+    "title": "Центр отдыха «Айтар»",
+    "subtitle": "Цандрипш, Абхазия",
+    "description": "Отдых у моря для всей семьи и организованных детских групп. Теплое гостеприимство, уютное размещение и насыщенная программа."
+  },
+  "contacts": {
+    "title": "Контакты",
+    "items": [
+      { "icon": "Phone", "label": "+7 (921) 393-22-60 — Надежда", "href": "tel:+79213932260" },
+      { "icon": "Phone", "label": "+7 (921) 793-74-44 — Дмитрий", "href": "tel:+79217937444" },
+      { "icon": "Mail", "label": "aitar.abhazia@mail.ru", "href": "mailto:aitar.abhazia@mail.ru" }
+    ]
+  },
+  "links": {
+    "title": "Быстрые ссылки",
+    "items": [
+      { "href": "#about", "label": "О лагере" },
+      { "href": "#pricing", "label": "Цены и смены" },
+      { "href": "#accommodation", "label": "Проживание" },
+      { "href": "#activities", "label": "Развлечения" },
+      { "href": "#dance", "label": "Танцевальный интенсив" },
+      { "href": "#sports-camps", "label": "Спортивные сборы" },
+      { "href": "#transfer", "label": "Трансфер" },
+      { "href": "#gallery", "label": "Галерея" },
+      { "href": "#reviews", "label": "Отзывы" },
+      { "href": "#location", "label": "Локация" },
+      { "href": "#contact", "label": "Заявка" }
+    ]
+  },
+  "copyright": "© 2025 Центр отдыха «Айтар». Все права защищены."
+}
