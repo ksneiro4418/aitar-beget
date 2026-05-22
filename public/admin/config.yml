@@ -1,12 +1,14 @@
-# Бэкенд CMS: GitHub через DecapBridge — бесплатная замена Netlify Identity.
+# Бэкенд CMS: GitHub через DecapBridge (PKCE) — бесплатная замена Netlify Identity.
 # Редактор входит по e-mail / Google / Microsoft, аккаунт GitHub ему НЕ нужен.
-# ПЕРЕД ЗАПУСКОМ: зарегистрируйте сайт на https://decapbridge.com, привяжите
-# репозиторий и подставьте свой SITE_ID в identity_url (подробно — в README).
+# Сайт зарегистрирован на decapbridge.com, SITE_ID подставлен ниже.
 backend:
   name: git-gateway
-  repo: ksneiro4418/aitar-beget        # ваш репозиторий на GitHub (owner/repo)
+  repo: ksneiro4418/aitar-beget        # репозиторий на GitHub (owner/repo)
   branch: main
-  identity_url: https://auth.decapbridge.com/sites/YOUR_SITE_ID
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/4f777f39-2e55-46e4-b833-016a6ec29a12/pkce
+  auth_token_endpoint: /sites/4f777f39-2e55-46e4-b833-016a6ec29a12/token
   gateway_url: https://gateway.decapbridge.com
   commit_messages:
     create: 'Создание «{{slug}}» в {{collection}} — {{author-name}} <{{author-login}}> через DecapBridge'
