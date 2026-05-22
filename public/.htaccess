@@ -5,6 +5,10 @@
   RewriteEngine On
   RewriteBase /
 
+  # Не трогаем ACME-проверку Let's Encrypt (выпуск и автопродление SSL):
+  # без этого SPA-перенаправление ломает проверку домена сертификатором.
+  RewriteRule "^\.well-known/" - [L]
+
   # Реально существующие файлы и папки отдаём как есть
   # (assets/, /admin/, /uploads/, *.jpg, content/*.json и т.д.)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
