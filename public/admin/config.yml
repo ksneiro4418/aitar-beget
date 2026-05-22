@@ -4,7 +4,7 @@
 # репозиторий и подставьте свой SITE_ID в identity_url (подробно — в README).
 backend:
   name: git-gateway
-  repo: ksneiro4418/aitar-site        # ваш репозиторий на GitHub (owner/repo)
+  repo: ksneiro4418/aitar-beget        # ваш репозиторий на GitHub (owner/repo)
   branch: main
   identity_url: https://auth.decapbridge.com/sites/YOUR_SITE_ID
   gateway_url: https://gateway.decapbridge.com

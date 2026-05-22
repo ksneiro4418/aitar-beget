@@ -56,11 +56,11 @@ vite.config.ts   # конфиг сборки
 
 ### Первичная настройка (делается один раз владельцем)
 
-1. Создайте/используйте репозиторий на GitHub (например, `ksneiro4418/aitar-site`)
+1. Создайте/используйте репозиторий на GitHub (например, `ksneiro4418/aitar-beget`)
    и запушьте в него этот проект (см. раздел 5).
 2. Зарегистрируйтесь на **https://decapbridge.com** и нажмите **Create New Site**.
 3. Укажите репозиторий в формате `владелец/имя-репозитория`
-   (например, `ksneiro4418/aitar-site`).
+   (например, `ksneiro4418/aitar-beget`).
 4. Сгенерируйте **fine-grained GitHub-токен** с правами на чтение/запись
    (Contents + Pull requests) и привяжите его в DecapBridge.
 5. Укажите адрес админки: `https://aitarabhazia.ru/admin/`.
@@ -86,7 +86,7 @@ git init
 git add .
 git commit -m "Initial commit"
 git branch -M main
-git remote add origin https://github.com/ksneiro4418/aitar-site.git
+git remote add origin https://github.com/ksneiro4418/aitar-beget.git
 git push -u origin main
 ```
 
@@ -127,7 +127,7 @@ SPA-роутинг уже настроен: файл `public/.htaccess` при �
 ```bash
 ssh ЛОГИН@ЛОГИН.beget.tech
 cd ~/aitarabhazia.ru
-git clone https://github.com/ksneiro4418/aitar-site.git src
+git clone https://github.com/ksneiro4418/aitar-beget.git src
 cd src
 npm ci
 npm run build
