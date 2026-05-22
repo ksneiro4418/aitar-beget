@@ -1,7 +1,26 @@
+# Бэкенд CMS: GitHub через DecapBridge — бесплатная замена Netlify Identity.
+# Редактор входит по e-mail / Google / Microsoft, аккаунт GitHub ему НЕ нужен.
+# ПЕРЕД ЗАПУСКОМ: зарегистрируйте сайт на https://decapbridge.com, привяжите
+# репозиторий и подставьте свой SITE_ID в identity_url (подробно — в README).
 backend:
   name: git-gateway
+  repo: ksneiro4418/aitar-site        # ваш репозиторий на GitHub (owner/repo)
   branch: main
+  identity_url: https://auth.decapbridge.com/sites/YOUR_SITE_ID
+  gateway_url: https://gateway.decapbridge.com
+  commit_messages:
+    create: 'Создание «{{slug}}» в {{collection}} — {{author-name}} <{{author-login}}> через DecapBridge'
+    update: 'Изменение «{{slug}}» в {{collection}} — {{author-name}} <{{author-login}}> через DecapBridge'
+    delete: 'Удаление «{{slug}}» из {{collection}} — {{author-name}} <{{author-login}}> через DecapBridge'
+    uploadMedia: 'Загрузка файла «{{path}}» — {{author-name}} <{{author-login}}> через DecapBridge'
+    deleteMedia: 'Удаление файла «{{path}}» — {{author-name}} <{{author-login}}> через DecapBridge'
 
+# Брендирование экрана входа DecapBridge
+site_url: https://aitarabhazia.ru
+logo_url: https://decapbridge.com/decapcms-with-bridge.svg
+
+# Пути соответствуют структуре РЕПОЗИТОРИЯ (исходников), а не сборки dist/.
+# Vite копирует public/ в корень dist/, поэтому медиа доступны по /uploads.
 media_folder: public/uploads
 public_folder: /uploads
 
