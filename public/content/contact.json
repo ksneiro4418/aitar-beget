@@ -4,19 +4,19 @@
   "highlight": "заявку",
   "description": "Заполните форму, и мы свяжемся с вами для обсуждения деталей вашего отдыха",
   "accessKey": "34cc4cbd-e6bf-400b-a219-18403ed035f9",
-  "emailTo": "aitar.abhazia@mail.ru",
+  "emailTo": "ksneiro4418@gmail.com",
   "form": {
-    "nameLabel": "Ваше имя",
-    "namePlaceholder": "Иван Иванов",
-    "phoneLabel": "Телефон",
+    "successMessage": "Мы свяжемся с вами в ближайшее время.",
     "phonePlaceholder": "+7 (___) ___-__-__",
-    "emailLabel": "Email",
-    "emailPlaceholder": "example@mail.ru",
-    "messageLabel": "Комментарий",
-    "messagePlaceholder": "Количество человек, даты, пожелания...",
+    "phoneLabel": "Телефон",
+    "namePlaceholder": "Иван Иванов",
+    "nameLabel": "Ваше имя",
     "submitButton": "Отправить заявку",
+    "messagePlaceholder": "Количество человек, даты, пожелания...",
+    "messageLabel": "Комментарий",
     "successTitle": "Заявка отправлена!",
-    "successMessage": "Мы свяжемся с вами в ближайшее время."
+    "emailPlaceholder": "example@mail.ru",
+    "emailLabel": "Email"
   },
   "subject": "Новая заявка с сайта Айтар!"
 }
