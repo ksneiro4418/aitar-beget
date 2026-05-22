@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type FormEvent } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -45,11 +45,62 @@ function useContent<T>(path: string): { data: T | null; loading: boolean; error:
   return { data, loading, error }
 }
 
+// Отправка формы через Web3Forms (AJAX, без редиректа на web3forms.com)
+async function postToWeb3Forms(formEl: HTMLFormElement): Promise<boolean> {
+  const response = await fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: { Accept: 'application/json' },
+    body: new FormData(formEl),
+  })
+  const result = await response.json()
+  return Boolean(result.success)
+}
+
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeTab, setActiveTab] = useState<'all' | 'creative' | 'sport'>('all')
   const [reviewFormOpen, setReviewFormOpen] = useState(false)
+
+  // Состояние формы заявки (Web3Forms, кастомный экран успеха без редиректа)
+  const [formSubmitting, setFormSubmitting] = useState(false)
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  const [formError, setFormError] = useState('')
+
+  // Состояние формы отзыва (Web3Forms, кастомный экран успеха без редиректа)
+  const [reviewSubmitting, setReviewSubmitting] = useState(false)
+  const [reviewSubmitted, setReviewSubmitted] = useState(false)
+  const [reviewError, setReviewError] = useState('')
+
+  const handleContactSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setFormError('')
+    setFormSubmitting(true)
+    try {
+      const ok = await postToWeb3Forms(e.currentTarget)
+      if (ok) setFormSubmitted(true)
+      else setFormError('Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.')
+    } catch {
+      setFormError('Ошибка сети. Проверьте подключение и попробуйте ещё раз.')
+    } finally {
+      setFormSubmitting(false)
+    }
+  }
+
+  const handleReviewSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setReviewError('')
+    setReviewSubmitting(true)
+    try {
+      const ok = await postToWeb3Forms(e.currentTarget)
+      if (ok) setReviewSubmitted(true)
+      else setReviewError('Не удалось отправить отзыв. Попробуйте ещё раз.')
+    } catch {
+      setReviewError('Ошибка сети. Попробуйте ещё раз.')
+    } finally {
+      setReviewSubmitting(false)
+    }
+  }
 
   const hero = useContent<any>('/content/hero.json')
   const features = useContent<any>('/content/features.json')
@@ -746,10 +797,18 @@ export default function Home() {
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{reviews.data?.formTitle || 'Ваш отзыв'}</h3>
                   <p className="text-gray-600 mb-6">{reviews.data?.formDescription || 'Поделитесь впечатлениями'}</p>
-                  <form action="https://formsubmit.co/aitar.abhazia@mail.ru" method="POST" className="space-y-4">
-                    <input type="hidden" name="_subject" value="Новый отзыв на модерацию — Айтар" />
-                    <input type="hidden" name="_template" value="table" />
-                    <input type="hidden" name="_captcha" value="false" />
+                  {reviewSubmitted ? (
+                    <div className="text-center py-8">
+                      <CheckCircle className="w-14 h-14 text-green-500 mx-auto mb-4" />
+                      <h4 className="text-xl font-bold text-gray-900 mb-2">Спасибо за отзыв!</h4>
+                      <p className="text-gray-600">{reviews.data?.formNote || 'Отзывы проходят модерацию перед публикацией'}</p>
+                    </div>
+                  ) : (
+                  <form onSubmit={handleReviewSubmit} className="space-y-4">
+                    {/* Web3Forms: тот же ключ, что и у формы заявки; ответ обрабатывается через fetch без редиректа */}
+                    <input type="hidden" name="access_key" value={contact.data?.accessKey || '34cc4cbd-e6bf-400b-a219-18403ed035f9'} />
+                    <input type="hidden" name="subject" value="Новый отзыв на модерацию — Айтар" />
+                    <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">{reviews.data?.formNameLabel || 'Ваше имя'}</label>
                       <Input name="name" placeholder={reviews.data?.formNamePlaceholder || 'Анна Петрова'} required className="h-12" />
@@ -769,12 +828,14 @@ export default function Home() {
                         ))}
                       </div>
                     </div>
-                    <Button type="submit" className="w-full h-12 bg-sun-500 hover:bg-sun-600 text-white">
+                    <Button type="submit" disabled={reviewSubmitting} className="w-full h-12 bg-sun-500 hover:bg-sun-600 text-white">
                       <Send className="w-4 h-4 mr-2" />
-                      {reviews.data?.formSubmit || 'Отправить на модерацию'}
+                      {reviewSubmitting ? 'Отправка...' : (reviews.data?.formSubmit || 'Отправить на модерацию')}
                     </Button>
+                    {reviewError && <p className="text-sm text-red-500 text-center">{reviewError}</p>}
                     <p className="text-xs text-gray-500 text-center">{reviews.data?.formNote || 'Отзывы проходят модерацию перед публикацией'}</p>
                   </form>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -797,10 +858,18 @@ export default function Home() {
           </div>
           <Card className="border-0 shadow-2xl bg-white/80 backdrop-blur-sm">
             <CardContent className="p-8 md:p-12">
-              <form action="https://formsubmit.co/aitar.abhazia@mail.ru" method="POST" className="space-y-6">
-                <input type="hidden" name="_subject" value={contact.data?.subject || 'Новая заявка с сайта Айтар!'} />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_captcha" value="false" />
+              {formSubmitted ? (
+                <div className="text-center py-12">
+                  <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-6" />
+                  <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">{contact.data?.form?.successTitle || 'Заявка отправлена!'}</h3>
+                  <p className="text-lg text-gray-600">{contact.data?.form?.successMessage || 'Мы свяжемся с вами в ближайшее время.'}</p>
+                </div>
+              ) : (
+              <form onSubmit={handleContactSubmit} className="space-y-6">
+                {/* Web3Forms: ключ и тема письма берутся из contact.json, ответ обрабатывается через fetch без редиректа */}
+                <input type="hidden" name="access_key" value={contact.data?.accessKey || '34cc4cbd-e6bf-400b-a219-18403ed035f9'} />
+                <input type="hidden" name="subject" value={contact.data?.subject || 'Новая заявка с сайта Айтар!'} />
+                <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">{contact.data?.form?.nameLabel || 'Ваше имя'}</label>
@@ -819,14 +888,13 @@ export default function Home() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">{contact.data?.form?.messageLabel || 'Комментарий'}</label>
                   <Textarea id="form-message" name="message" placeholder={contact.data?.form?.messagePlaceholder || 'Количество человек, даты, пожелания...'} rows={4} />
                 </div>
-                <Button type="submit" size="lg" className="w-full h-14 bg-sun-500 hover:bg-sun-600 text-white text-lg shadow-glow">
+                <Button type="submit" size="lg" disabled={formSubmitting} className="w-full h-14 bg-sun-500 hover:bg-sun-600 text-white text-lg shadow-glow">
                   <Send className="w-5 h-5 mr-2" />
-                  {contact.data?.form?.submitButton || 'Отправить заявку'}
+                  {formSubmitting ? 'Отправка...' : (contact.data?.form?.submitButton || 'Отправить заявку')}
                 </Button>
-                <p className="text-sm text-gray-500 text-center">
-                  После отправки вы вернётесь на этот сайт с подтверждением
-                </p>
+                {formError && <p className="text-sm text-red-500 text-center">{formError}</p>}
               </form>
+              )}
             </CardContent>
           </Card>
         </div>
