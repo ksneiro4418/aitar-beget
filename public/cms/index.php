@@ -9,24 +9,24 @@ $error = '';
 
 // --- Обработка форм входа/настройки -------------------------------------
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $action = $_POST['action'] ?? '';
+  $action = isset($_POST['action']) ? $_POST['action'] : '';
 
   if ($action === 'logout') {
     cms_logout();
     header('Location: index.php'); exit;
   }
 
-  if (!cms_check_csrf($_POST['csrf'] ?? null)) {
+  if (!cms_check_csrf(isset($_POST['csrf']) ? $_POST['csrf'] : null)) {
     $error = 'Сессия устарела, попробуйте ещё раз.';
   } elseif ($action === 'setpw' && !cms_is_setup()) {
-    $pw = (string)($_POST['password'] ?? '');
-    $pw2 = (string)($_POST['password2'] ?? '');
+    $pw = (string)(isset($_POST['password']) ? $_POST['password'] : '');
+    $pw2 = (string)(isset($_POST['password2']) ? $_POST['password2'] : '');
     if (strlen($pw) < 6) $error = 'Пароль слишком короткий (мин. 6 символов).';
     elseif ($pw !== $pw2) $error = 'Пароли не совпадают.';
     elseif (!cms_set_password($pw)) $error = 'Не удалось сохранить пароль (проблема с правами на сервере).';
     else { cms_login(); header('Location: index.php'); exit; }
   } elseif ($action === 'login') {
-    if (cms_verify_password((string)($_POST['password'] ?? ''))) { cms_login(); header('Location: index.php'); exit; }
+    if (cms_verify_password((string)(isset($_POST['password']) ? $_POST['password'] : ''))) { cms_login(); header('Location: index.php'); exit; }
     else $error = 'Неверный пароль.';
   }
 }
