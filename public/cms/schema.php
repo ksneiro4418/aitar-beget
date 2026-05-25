@@ -48,6 +48,15 @@ return [
     ],
   ],
 
+  'background' => [
+    'label' => '🖼️ Фон главного экрана',
+    'file'  => 'background.json',
+    'seed'  => ['hero' => '/hero-bg.jpg'],
+    'fields' => [
+      ['name'=>'hero','label'=>'Фоновое изображение (за заголовком)','widget'=>'image','hint'=>'Загрузите фото — оно станет фоном главного экрана. Пусто = фото по умолчанию.'],
+    ],
+  ],
+
   'hero' => [
     'label' => '🏖️ Главный экран (Hero)',
     'file'  => 'hero.json',

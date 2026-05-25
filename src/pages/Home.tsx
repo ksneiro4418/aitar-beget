@@ -116,6 +116,7 @@ export default function Home() {
   const dance = useContent<any>('/content/dance.json')
   const sportsCamps = useContent<any>('/content/sports-camps.json')
   const header = useContent<any>('/content/header.json')
+  const background = useContent<any>('/content/background.json')
 
   const loading = [hero, features, accommodation, activities, gallery, location, contact, footer, pricing, transfer, dance, sportsCamps, reviews].some(c => c.loading)
 
@@ -214,7 +215,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/hero-bg.jpg" alt="Абхазия" className="w-full h-full object-cover" />
+          <img src={background.data?.hero || '/hero-bg.jpg'} alt="Абхазия" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
         </div>
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
