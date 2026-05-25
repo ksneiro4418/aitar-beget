@@ -22,7 +22,9 @@ switch ($action) {
     $schema = cms_schema();
     if (!isset($schema[$collection])) json_response(['ok' => false, 'error' => 'Неизвестный раздел'], 404);
     $data = load_content($collection);
-    if ($data === null) $data = new stdClass(); // файла нет — пустой объект
+    if ($data === null) { // файла ещё нет — отдаём seed (значения по умолчанию) или пустой объект
+      $data = isset($schema[$collection]['seed']) ? $schema[$collection]['seed'] : new stdClass();
+    }
     json_response(['ok' => true, 'data' => $data]);
   }
 

@@ -1,0 +1,17 @@
+{
+  "logo": "Айтар",
+  "cta": "Оставить заявку",
+  "nav": [
+    { "href": "#about", "label": "О лагере" },
+    { "href": "#pricing", "label": "Цены и смены" },
+    { "href": "#accommodation", "label": "Проживание" },
+    { "href": "#activities", "label": "Развлечения" },
+    { "href": "#dance", "label": "Танцевальный интенсив" },
+    { "href": "#sports-camps", "label": "Спортивные сборы" },
+    { "href": "#transfer", "label": "Трансфер" },
+    { "href": "#gallery", "label": "Галерея" },
+    { "href": "#reviews", "label": "Отзывы" },
+    { "href": "#location", "label": "Локация" },
+    { "href": "#contact", "label": "Заявка" }
+  ]
+}

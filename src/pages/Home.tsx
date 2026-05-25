@@ -115,6 +115,7 @@ export default function Home() {
   const transfer = useContent<any>('/content/transfer.json')
   const dance = useContent<any>('/content/dance.json')
   const sportsCamps = useContent<any>('/content/sports-camps.json')
+  const header = useContent<any>('/content/header.json')
 
   const loading = [hero, features, accommodation, activities, gallery, location, contact, footer, pricing, transfer, dance, sportsCamps, reviews].some(c => c.loading)
 
@@ -140,7 +141,7 @@ export default function Home() {
     }, 800)
   }
 
-  const navLinks = footer.data?.links?.items || [
+  const navLinks = header.data?.nav || footer.data?.links?.items || [
     { href: '#about', label: 'О лагере' },
     { href: '#pricing', label: 'Цены и смены' },
     { href: '#accommodation', label: 'Проживание' },
@@ -175,7 +176,7 @@ export default function Home() {
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-sun-400 to-sun-600 flex items-center justify-center">
                 <Sunrise className="w-5 h-5 text-white" />
               </div>
-              <span className={`font-bold text-xl transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}>Айтар</span>
+              <span className={`font-bold text-xl transition-colors ${scrolled ? 'text-gray-900' : 'text-white'}`}>{header.data?.logo || 'Айтар'}</span>
             </a>
             <div className="hidden md:flex items-center gap-6">
               {navLinks.slice(0, 6).map((link: any) => (
@@ -186,7 +187,7 @@ export default function Home() {
             </div>
             <div className="hidden md:block">
               <Button onClick={() => scrollTo('#contact')} className="bg-sun-500 hover:bg-sun-600 text-white shadow-glow">
-                Оставить заявку
+                {header.data?.cta || 'Оставить заявку'}
               </Button>
             </div>
             <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
@@ -203,7 +204,7 @@ export default function Home() {
                 </button>
               ))}
               <Button onClick={() => scrollTo('#contact')} className="w-full bg-sun-500 hover:bg-sun-600 text-white">
-                Оставить заявку
+                {header.data?.cta || 'Оставить заявку'}
               </Button>
             </div>
           </div>

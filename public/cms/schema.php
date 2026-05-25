@@ -17,6 +17,37 @@
 $ICONS = ['Palmtree','Shield','Heart','Sunrise','Mountain','Star','Waves','Music','Trophy','Utensils','MapPin','Mail','Phone','Bed','CheckCircle','Bus','CreditCard','Users','Calendar','Baby','Plane'];
 
 return [
+  'header' => [
+    'label' => '🧭 Шапка сайта (меню)',
+    'file'  => 'header.json',
+    // seed — значения по умолчанию: показываются в CMS, если файла ещё нет на сервере
+    'seed'  => [
+      'logo' => 'Айтар',
+      'cta'  => 'Оставить заявку',
+      'nav'  => [
+        ['href'=>'#about','label'=>'О лагере'],
+        ['href'=>'#pricing','label'=>'Цены и смены'],
+        ['href'=>'#accommodation','label'=>'Проживание'],
+        ['href'=>'#activities','label'=>'Развлечения'],
+        ['href'=>'#dance','label'=>'Танцевальный интенсив'],
+        ['href'=>'#sports-camps','label'=>'Спортивные сборы'],
+        ['href'=>'#transfer','label'=>'Трансфер'],
+        ['href'=>'#gallery','label'=>'Галерея'],
+        ['href'=>'#reviews','label'=>'Отзывы'],
+        ['href'=>'#location','label'=>'Локация'],
+        ['href'=>'#contact','label'=>'Заявка'],
+      ],
+    ],
+    'fields' => [
+      ['name'=>'logo','label'=>'Текст логотипа','widget'=>'string'],
+      ['name'=>'nav','label'=>'Пункты верхнего меню','widget'=>'list','fields'=>[
+        ['name'=>'label','label'=>'Название','widget'=>'string'],
+        ['name'=>'href','label'=>'Якорь раздела','widget'=>'string','hint'=>'куда ведёт пункт, напр. #pricing (на десктопе показываются первые 6)'],
+      ]],
+      ['name'=>'cta','label'=>'Кнопка «Оставить заявку»','widget'=>'string'],
+    ],
+  ],
+
   'hero' => [
     'label' => '🏖️ Главный экран (Hero)',
     'file'  => 'hero.json',
