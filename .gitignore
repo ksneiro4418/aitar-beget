@@ -15,6 +15,9 @@ dist-ssr
 # Архивы с исходниками / бэкапы — не коммитим
 *.zip
 
+# Рантайм-данные админки на Beget (хэш пароля) — не в репозиторий
+public/cms/_data/auth.php
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
