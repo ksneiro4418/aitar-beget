@@ -5,8 +5,9 @@
  */
 
 if (session_status() === PHP_SESSION_NONE) {
+  $cms_https = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
   if (PHP_VERSION_ID >= 70300) {
-    session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax']);
+    session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax', 'secure' => $cms_https]);
   }
   session_start();
 }
