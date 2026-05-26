@@ -36,6 +36,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # Сброшенное имя state-файла → разовая полная перезаливка (чинит застрявший index.html).
+          state-name: .deploy-state-v2.json
           # Контент и медиа редактируются на Beget через /cms/ — деплой их НЕ трогает
           # (иначе перетёр бы правки редактора). Также не трогаем данные админки.
           exclude: |
