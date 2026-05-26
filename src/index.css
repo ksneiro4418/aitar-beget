@@ -38,6 +38,12 @@
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
+
+  /* Переносы строк в текстовом контенте: редактор делает новые строки/абзацы
+     просто через Enter в админке — на сайте они отображаются (иначе HTML их схлопывает). */
+  p, li {
+    white-space: pre-line;
+  }
 }
 
 @layer utilities {
