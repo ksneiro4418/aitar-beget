@@ -366,13 +366,17 @@ export default function Home() {
             </div>
             <div className="bg-white rounded-2xl shadow-xl p-8 text-center border border-gray-100">
               <h4 className="font-bold text-gray-900 mb-4">{pricing.data?.booking?.qrTitle || 'Для успешной оплаты отсканируйте QR-код в приложении банка'}</h4>
-              <div className="w-48 h-48 bg-gray-100 rounded-xl mx-auto mb-4 flex items-center justify-center border-2 border-dashed border-gray-300">
-                <div className="text-center">
-                  <CreditCard className="w-10 h-10 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-400">QR-код для оплаты</p>
-                  <p className="text-xs text-gray-400 mt-1">(вставьте изображение)</p>
+              {pricing.data?.booking?.qr ? (
+                <img src={pricing.data.booking.qr} alt="QR-код для оплаты" className="w-48 h-48 object-contain rounded-xl mx-auto mb-4" />
+              ) : (
+                <div className="w-48 h-48 bg-gray-100 rounded-xl mx-auto mb-4 flex items-center justify-center border-2 border-dashed border-gray-300">
+                  <div className="text-center">
+                    <CreditCard className="w-10 h-10 text-gray-400 mx-auto mb-2" />
+                    <p className="text-sm text-gray-400">QR-код для оплаты</p>
+                    <p className="text-xs text-gray-400 mt-1">(вставьте изображение)</p>
+                  </div>
                 </div>
-              </div>
+              )}
               <p className="text-sm text-gray-500">{pricing.data?.booking?.qrSubtitle || 'или воспользуйтесь реквизитами'}</p>
             </div>
           </div>

@@ -117,6 +117,7 @@ return [
         ['name'=>'depositNote','label'=>'Примечание к предоплате','widget'=>'string'],
         ['name'=>'finalPayment','label'=>'Итоговый расчёт','widget'=>'text'],
         ['name'=>'qrTitle','label'=>'Заголовок QR','widget'=>'string'],
+        ['name'=>'qr','label'=>'QR-код (картинка для оплаты)','widget'=>'image','hint'=>'Загрузите изображение QR-кода — оно появится в блоке «Бронирование». Пусто = заглушка.'],
         ['name'=>'qrSubtitle','label'=>'Подпись QR','widget'=>'string'],
       ]],
       ['name'=>'howToBook','label'=>'Как оформить заявку','widget'=>'object','fields'=>[
